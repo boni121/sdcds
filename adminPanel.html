@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    adminPanel
+</body>
+
+<script>
+
+    // Функция для отображения данных пользователя по разделам
+
+    function uploadDataUser(table_name, data) {
+        // Создаем заголовок h3 с названием таблицы
+        const title = document.createElement('h3');
+        title.textContent = table_name;
+        document.body.appendChild(title);
+
+        // Создаем список ul
+        const list = document.createElement('ul');
+
+        // Проходим по всем ключам объекта data
+        for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+                const listItem = document.createElement('li');
+
+                // Создаем элемент p с названием ключа
+                const keyElement = document.createElement('p');
+                keyElement.textContent = key;
+
+                // Создаем input с значением ключа
+                const inputElement = document.createElement('input');
+                inputElement.value = data[key];
+
+                // Создаем первую кнопку "Сохранить"
+                const buttonSave = document.createElement('button');
+                buttonSave.textContent = 'Сохранить';
+
+                // Добавляем функционал на кнопку "Сохранить"
+                buttonSave.addEventListener('click', () => {
+                    const updatedData = {
+                        variable_name: keyElement.textContent,
+                        user_id: "b2917e7c-d9b3-4e44-becb-6973e23232bc",
+                        value: inputElement.value
+                    };
+
+                    fetch(`/add/${table_name}`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(updatedData)
+                    })
+                        .then((response) => {
+                            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                            return response.json();
+                        })
+                        .then((data) => console.log("Success:", data))
+                        .catch((error) => console.error("Error:", error));
+                });
+
+                // Создаем вторую кнопку "Удалить"
+                const buttonDelete = document.createElement('button');
+                buttonDelete.textContent = 'Удалить';
+
+                // Добавляем функционал на кнопку "Удалить"
+                buttonDelete.addEventListener('click', () => {
+                    const updatedData = {
+                        variable_name: keyElement.textContent,
+                        user_id: "b2917e7c-d9b3-4e44-becb-6973e23232bc",
+                    };
+
+                    fetch(`/delete/${table_name}`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(updatedData)
+                    })
+                        .then((response) => {
+                            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                            return response.json();
+                        })
+                        .then((data) => {
+                            console.log("Success:", data);
+                            inputElement.value = ""; // Очищаем input после успешного удаления
+                        })
+                        .catch((error) => console.error("Error:", error));
+                });
+
+                // Добавляем всё в элемент списка
+                listItem.appendChild(keyElement);
+                listItem.appendChild(inputElement);
+                listItem.appendChild(buttonSave);
+                listItem.appendChild(buttonDelete);
+
+                // Добавляем элемент списка в ul
+                list.appendChild(listItem);
+            }
+        }
+
+        // Добавляем список в body
+        document.body.appendChild(list);
+    }
+
+
+    TABLES = ['statistics', 'operations', 'withdrawals', 'deals', 'requisites']
+
+    // Запрос на данные пользователя по разделам
+
+    for (let i = 0; i < 5; i++) {
+        const data = {
+            table_name: TABLES[i],
+            user_id: "b2917e7c-d9b3-4e44-becb-6973e23232bc"
+        };
+
+        fetch("/view_data", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+            .then((response) => {
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                return response.json();
+            })
+            .then((data_new) => {
+                console.log("Success:", data_new);
+                uploadDataUser(data['table_name'], data_new);
+
+            })
+            .catch((error) => console.error("Error:", error));
+    }
+
+</script>
+
+</html>

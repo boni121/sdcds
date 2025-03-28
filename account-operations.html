@@ -1,0 +1,785 @@
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.f979c78b.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chunk-vendors.ae7abc5c.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dashboard</title>
+    <script>window.API_URL = 'https://api.brabus.work/api/frontend';
+        window.X_GA_REF = 'GA1.1.1620887114.1716834560';</script>
+    <script src="/js/pdf.js" type="module"></script>
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link href="/css/app.f979c78b.css" rel="pre" as="style">
+    <link href="/css/chunk-vendors.ae7abc5c.css" rel="pre" as="style">
+    <link href="/js/app.91699031.js" rel="pre" as="script">
+    <link href="/js/chunk-vendors.a3383902.js" rel="pre" as="script">
+    <link href="/css/chunk-vendors.ae7abc5c.css" rel="stylesheet">
+    <link href="/css/app.f979c78b.css" rel="stylesheet">
+    <style>
+        .vue-notification-group {
+            display: block;
+            position: fixed;
+            z-index: 5000
+        }
+
+        .vue-notification-wrapper {
+            display: block;
+            overflow: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0
+        }
+
+        .notification-title {
+            font-weight: 600
+        }
+
+        .vue-notification-template {
+            display: block;
+            box-sizing: border-box;
+            background: white;
+            text-align: left
+        }
+
+        .vue-notification {
+            display: block;
+            box-sizing: border-box;
+            text-align: left;
+            font-size: 12px;
+            padding: 10px;
+            margin: 0 5px 5px;
+            color: #fff;
+            background: #44A4FC;
+            border-left: 5px solid #187FE7
+        }
+
+        .vue-notification.warn {
+            background: #ffb648;
+            border-left-color: #f48a06
+        }
+
+        .vue-notification.error {
+            background: #E54D42;
+            border-left-color: #b82e24
+        }
+
+        .vue-notification.success {
+            background: #68CD86;
+            border-left-color: #42a85f
+        }
+
+        .vn-fade-enter-active,
+        .vn-fade-leave-active,
+        .vn-fade-move {
+            transition: all .5s
+        }
+
+        .vn-fade-enter-from,
+        .vn-fade-leave-to {
+            opacity: 0
+        }
+    </style>
+</head>
+
+<body><noscript><strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to
+            continue.</strong></noscript>
+    <div id="app" data-v-app="">
+        <div id="app"><!---->
+            <header data-v-e9038fd2="" class="" id="header-main">
+                <nav data-v-e9038fd2="" class="navbar navbar-main navbar-expand-lg shadow-sm navbar-light bg-white p-0"
+                    id="navbar-main">
+                    <div data-v-e9038fd2="" class="w-100"><button data-v-e9038fd2=""
+                            class="navbar-toggler order-lg-2 p-2 w-100" type="button" data-toggle="collapse"
+                            data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse"
+                            aria-expanded="false" aria-label="Toggle navigation"><span data-v-e9038fd2=""
+                                class="navbar-toggler-icon"></span></button>
+                        <div data-v-e9038fd2="" class="collapse navbar-collapse navbar-collapse-overlay order-lg-3"
+                            id="navbar-main-collapse" style="top: 3rem; bottom: 1rem;">
+                            <div data-v-e9038fd2="" class="position-relative float-end" style="display: none;"><button
+                                    data-v-e9038fd2="" class="navbar-toggler m-2" type="button" data-toggle="collapse"
+                                    data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse"
+                                    aria-expanded="false" aria-label="Toggle navigation"><svg data-v-e9038fd2=""
+                                        xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-x">
+                                        <line data-v-e9038fd2="" x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line data-v-e9038fd2="" x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg></button></div>
+                            <ul data-v-e9038fd2="" class="navbar-nav ms-3 overflow-auto pe-3">
+                                <li data-v-e9038fd2=""
+                                    class="nav-item nav-item-spaced d-lg-block text-nowrap border-end pe-3 me-3">
+                                    <div data-v-e9038fd2="" class="d-flex h-100 align-items-center"><a
+                                            data-v-e9038fd2="" href="/" class="text-capitalize nav-link p-0 active"><img
+                                                data-v-e9038fd2="" alt="ваше название" src="/apple-touch-icon.png" class=""
+                                                style="height: 30px;"><span data-v-e9038fd2=""
+                                                class="ms-2">ваше название</span></a></div>
+                                </li><!---->
+                                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a
+                                        data-v-e9038fd2="" href="/" class="nav-link text-capitalize-first"><span
+                                            data-v-e9038fd2="">Главная</span></a></li>
+                                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a
+                                        data-v-e9038fd2="" href="/statistic.html"
+                                        class="nav-link text-capitalize-first"><span
+                                            data-v-e9038fd2="">Статистика</span></a></li>
+                                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a
+                                        data-v-e9038fd2="" href="/account-operations.html"
+                                        class="nav-link text-capitalize-first active" aria-current="page"><span
+                                            data-v-e9038fd2="">история операций</span></a></li>
+                                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a
+                                        data-v-e9038fd2="" href="/deals.html"
+                                        class="nav-link text-capitalize-first"><span
+                                            data-v-e9038fd2="">сделки</span></a></li>
+                                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a
+                                        data-v-e9038fd2="" href="/requisites.html"
+                                        class="nav-link text-capitalize-first"><span
+                                            data-v-e9038fd2="">реквизиты</span></a></li>
+                                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a
+                                        data-v-e9038fd2="" href="/settings.html"
+                                        class="nav-link text-capitalize-first"><span
+                                            data-v-e9038fd2="">настройки</span></a></li>
+                            </ul>
+                            <ul data-v-e9038fd2="" class="navbar-nav align-items-lg-center d-lg-flex ms-3 ms-lg-auto">
+                                <li data-v-e9038fd2="" class="nav-item mt-2 mb-2">
+                                    <div data-v-e9038fd2="" class="d-flex flex-row align-items-center gap-2"><label
+                                            data-v-e9038fd2="" for="traderStatus" class="badge bg-danger">прием</label>
+                                        <div data-v-e9038fd2="" class="form-switch"><input data-v-e9038fd2=""
+                                                id="traderStatus" class="form-check-input" type="checkbox" role="switch"
+                                                style="cursor: pointer;"></div>
+                                    </div>
+                                </li>
+                                <li data-v-e9038fd2="" class="nav-item mt-2 mb-2 me-5">
+                                    <div data-v-e9038fd2="" class="d-flex flex-row align-items-center gap-2"><label
+                                            data-v-e9038fd2="" for="traderPayOutStatus"
+                                            class="badge bg-danger">выплата</label>
+                                        <div data-v-e9038fd2="" class="form-switch"><input data-v-e9038fd2=""
+                                                id="traderPayOutStatus" class="form-check-input" type="checkbox"
+                                                role="switch" style="cursor: pointer;"></div>
+                                    </div>
+                                </li><!---->
+                                <li data-v-e9038fd2="" class="nav-item"><a data-v-e9038fd2=""
+                                        class="nav-link text-nowrap" href="#">Выйти (Loading...) </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <div class="pl-2 pr-2">
+                <div class="-wrapper h-100">
+                    <div class="row m-4 mt-0">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card card-body mb-0">
+                                        <div class="row mt-2">
+                                            <div class="form-group mb-2 me-2 col-md-3 col-lg-3 col-xl-2">
+                                                <div class="col p-0">
+                                                    <div class=""><input type="text"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Номер счета"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-2 me-2 col-md-3 col-lg-3 col-xl-2">
+                                                <div class="col p-0">
+                                                    <div class=""><input class="form-control form-control-sm"
+                                                            placeholder="От даты">
+                                                        <div class="vc-popover-content-wrapper is-interactive"><!---->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-2 me-2 col-md-3 col-lg-3 col-xl-2">
+                                                <div class="col p-0">
+                                                    <div class=""><input class="form-control form-control-sm"
+                                                            placeholder="До даты">
+                                                        <div class="vc-popover-content-wrapper is-interactive"><!---->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-2 col-md-3 col-lg-3 col-xl-2 me-2">
+                                                <div class="col p-0">
+                                                    <div class="">
+                                                        <div tabindex="-1" class="multiselect multiselect-sm"
+                                                            role="combobox" aria-owns="listbox-types">
+                                                            <div class="multiselect__select"></div>
+                                                            <div class="multiselect__tags">
+                                                                <div class="multiselect__tags-wrap"
+                                                                    style="display: none;"></div><!--v-if-->
+                                                                <div class="multiselect__spinner"
+                                                                    style="display: none;"></div><input name=""
+                                                                    id="types" type="text" autocomplete="off"
+                                                                    spellcheck="false" placeholder="Тип" tabindex="0"
+                                                                    class="multiselect__input"
+                                                                    aria-controls="listbox-types"
+                                                                    style="width: 0px; position: absolute; padding: 0px;"><!--v-if--><span
+                                                                    class="multiselect__placeholder">Тип</span>
+                                                            </div>
+                                                            <div class="multiselect__content-wrapper" tabindex="-1"
+                                                                style="max-height: 300px; display: none;">
+                                                                <ul class="multiselect__content" role="listbox"
+                                                                    id="listbox-types" style="display: inline-block;">
+                                                                    <!--v-if-->
+                                                                    <li class="multiselect__element" id="types-0"
+                                                                        role="option"><span
+                                                                            class="multiselect__option--highlight multiselect__option"
+                                                                            data-select="Select"
+                                                                            data-selected="Selected"
+                                                                            data-deselect="Press enter to remove"><span>оплата
+                                                                                по счету -
+                                                                                отмена</span></span><!--v-if--></li>
+                                                                    <li class="multiselect__element" id="types-1"
+                                                                        role="option"><span class="multiselect__option"
+                                                                            data-select="Select"
+                                                                            data-selected="Selected"
+                                                                            data-deselect="Press enter to remove"><span>оплата
+                                                                                по счету</span></span><!--v-if--></li>
+                                                                    <li class="multiselect__element" id="types-2"
+                                                                        role="option"><span class="multiselect__option"
+                                                                            data-select="Select"
+                                                                            data-selected="Selected"
+                                                                            data-deselect="Press enter to remove"><span>вывод</span></span><!--v-if-->
+                                                                    </li>
+                                                                    <li class="multiselect__element" id="types-3"
+                                                                        role="option"><span class="multiselect__option"
+                                                                            data-select="Select"
+                                                                            data-selected="Selected"
+                                                                            data-deselect="Press enter to remove"><span>комиссия
+                                                                                за вывод</span></span><!--v-if--></li>
+                                                                    <li class="multiselect__element" id="types-4"
+                                                                        role="option"><span class="multiselect__option"
+                                                                            data-select="Select"
+                                                                            data-selected="Selected"
+                                                                            data-deselect="Press enter to remove"><span>внутренний
+                                                                                перевод</span></span><!--v-if--></li>
+                                                                    <li class="multiselect__element" id="types-5"
+                                                                        role="option"><span class="multiselect__option"
+                                                                            data-select="Select"
+                                                                            data-selected="Selected"
+                                                                            data-deselect="Press enter to remove"><span>депозит</span></span><!--v-if-->
+                                                                    </li>
+                                                                    <li class="multiselect__element" id="types-6"
+                                                                        role="option"><span class="multiselect__option"
+                                                                            data-select="Select"
+                                                                            data-selected="Selected"
+                                                                            data-deselect="Press enter to remove"><span>блокировка</span></span><!--v-if-->
+                                                                    </li>
+                                                                    <li class="multiselect__element" id="types-7"
+                                                                        role="option"><span class="multiselect__option"
+                                                                            data-select="Select"
+                                                                            data-selected="Selected"
+                                                                            data-deselect="Press enter to remove"><span>снятие
+                                                                                блокировки</span></span><!--v-if--></li>
+                                                                    <li class="multiselect__element" id="types-8"
+                                                                        role="option"><span class="multiselect__option"
+                                                                            data-select="Select"
+                                                                            data-selected="Selected"
+                                                                            data-deselect="Press enter to remove"><span>платеж
+                                                                                по сделке</span></span><!--v-if--></li>
+                                                                    <li class="multiselect__element" id="types-9"
+                                                                        role="option"><span class="multiselect__option"
+                                                                            data-select="Select"
+                                                                            data-selected="Selected"
+                                                                            data-deselect="Press enter to remove"><span>платеж
+                                                                                по сделке -
+                                                                                отмена</span></span><!--v-if--></li>
+                                                                    <li class="multiselect__element" id="types-10"
+                                                                        role="option"><span class="multiselect__option"
+                                                                            data-select="Select"
+                                                                            data-selected="Selected"
+                                                                            data-deselect="Press enter to remove"><span>награда
+                                                                                за сделку</span></span><!--v-if--></li>
+                                                                    <li class="multiselect__element" id="types-11"
+                                                                        role="option"><span class="multiselect__option"
+                                                                            data-select="Select"
+                                                                            data-selected="Selected"
+                                                                            data-deselect="Press enter to remove"><span>награда
+                                                                                за сделку -
+                                                                                отмена</span></span><!--v-if--></li>
+                                                                    <li class="multiselect__element" id="types-12"
+                                                                        role="option"><span class="multiselect__option"
+                                                                            data-select="Select"
+                                                                            data-selected="Selected"
+                                                                            data-deselect="Press enter to remove"><span>комиссия
+                                                                                сервиса</span></span><!--v-if--></li>
+                                                                    <li class="multiselect__element" id="types-13"
+                                                                        role="option"><span class="multiselect__option"
+                                                                            data-select="Select"
+                                                                            data-selected="Selected"
+                                                                            data-deselect="Press enter to remove"><span>комиссия
+                                                                                сервиса -
+                                                                                отмена</span></span><!--v-if--></li>
+                                                                    <li style="display: none;"><span
+                                                                            class="multiselect__option">No elements
+                                                                            found. Consider changing the search
+                                                                            query.</span></li>
+                                                                    <li style="display: none;"><span
+                                                                            class="multiselect__option">List is
+                                                                            empty.</span></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-2 col">
+                                                <div class="col-auto p-0 text-end"><button type="button"
+                                                        class="btn btn-outline-primary btn-sm rounded-pill me-2 text-capitalize-first">применить</button><button
+                                                        type="button"
+                                                        class="btn btn-outline-secondary btn-sm rounded-pill text-capitalize-first">сбросить</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="card card-body">
+                                        <div class="overflow-auto">
+                                            <table
+                                                class="table table-striped border-light align-middle text-left text-nowrap position-relative">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-capitalize-first">Дата</th>
+                                                        <th class="text-capitalize-first">валюта</th>
+                                                        <th class="text-capitalize-first">сумма</th>
+                                                        <th class="text-capitalize-first">Тип</th>
+                                                        <th class="text-capitalize-first">Баланс до</th>
+                                                        <th class="text-capitalize-first">Баланс после</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="text-danger">
+                                                        <td>2025-03-07 12:00</td>
+                                                        <td>USDT</td>
+                                                        <td>-5.00000000</td>
+                                                        <td>комиссия за вывод</td>
+                                                        <td>5.00000000</td>
+                                                        <td>0.00000000</td>
+                                                        <td class="text-end"><button type="button"
+                                                                class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i
+                                                                    class="fa fa-list"></i> подробнее</button></td>
+                                                    </tr>
+                                                    <tr class="text-danger">
+                                                        <td>2025-03-07 12:00</td>
+                                                        <td>USDT</td>
+                                                        <td>-495.00000000</td>
+                                                        <td>вывод</td>
+                                                        <td>500.00000000</td>
+                                                        <td>5.00000000</td>
+                                                        <td class="text-end"><button type="button"
+                                                                class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i
+                                                                    class="fa fa-list"></i> подробнее</button></td>
+                                                    </tr>
+                                                    <tr class="text-success">
+                                                        <td>2025-03-07 12:00</td>
+                                                        <td>USDT</td>
+                                                        <td>+500.00000000</td>
+                                                        <td>снятие блокировки</td>
+                                                        <td>0.00000000</td>
+                                                        <td>500.00000000</td>
+                                                        <td class="text-end"><button type="button"
+                                                                class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i
+                                                                    class="fa fa-list"></i> подробнее</button></td>
+                                                    </tr>
+                                                    <tr class="text-danger">
+                                                        <td>2025-03-07 11:42</td>
+                                                        <td>USDT</td>
+                                                        <td>-500.00000000</td>
+                                                        <td>блокировка</td>
+                                                        <td>500.00000000</td>
+                                                        <td>0.00000000</td>
+                                                        <td class="text-end"><button type="button"
+                                                                class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i
+                                                                    class="fa fa-list"></i> подробнее</button></td>
+                                                    </tr>
+                                                    <tr class="text-danger">
+                                                        <td>2025-03-05 13:59</td>
+                                                        <td>USDT</td>
+                                                        <td>-5.00000000</td>
+                                                        <td>комиссия за вывод</td>
+                                                        <td>505.00000000</td>
+                                                        <td>500.00000000</td>
+                                                        <td class="text-end"><button type="button"
+                                                                class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i
+                                                                    class="fa fa-list"></i> подробнее</button></td>
+                                                    </tr>
+                                                    <tr class="text-danger">
+                                                        <td>2025-03-05 13:59</td>
+                                                        <td>USDT</td>
+                                                        <td>-995.00000000</td>
+                                                        <td>вывод</td>
+                                                        <td>1 500.00000000</td>
+                                                        <td>505.00000000</td>
+                                                        <td class="text-end"><button type="button"
+                                                                class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i
+                                                                    class="fa fa-list"></i> подробнее</button></td>
+                                                    </tr>
+                                                    <tr class="text-success">
+                                                        <td>2025-03-05 13:59</td>
+                                                        <td>USDT</td>
+                                                        <td>+1 000.00000000</td>
+                                                        <td>снятие блокировки</td>
+                                                        <td>500.00000000</td>
+                                                        <td>1 500.00000000</td>
+                                                        <td class="text-end"><button type="button"
+                                                                class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i
+                                                                    class="fa fa-list"></i> подробнее</button></td>
+                                                    </tr>
+                                                    <tr class="text-danger">
+                                                        <td>2025-03-05 13:44</td>
+                                                        <td>USDT</td>
+                                                        <td>-1 000.00000000</td>
+                                                        <td>блокировка</td>
+                                                        <td>1 500.00000000</td>
+                                                        <td>500.00000000</td>
+                                                        <td class="text-end"><button type="button"
+                                                                class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i
+                                                                    class="fa fa-list"></i> подробнее</button></td>
+                                                    </tr>
+                                                    <tr class="text-danger">
+                                                        <td>2025-03-03 06:19</td>
+                                                        <td>USDT</td>
+                                                        <td>-5.00000000</td>
+                                                        <td>комиссия за вывод</td>
+                                                        <td>1 505.00000000</td>
+                                                        <td>1 500.00000000</td>
+                                                        <td class="text-end"><button type="button"
+                                                                class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i
+                                                                    class="fa fa-list"></i> подробнее</button></td>
+                                                    </tr>
+                                                    <tr class="text-danger">
+                                                        <td>2025-03-03 06:19</td>
+                                                        <td>USDT</td>
+                                                        <td>-95.00000000</td>
+                                                        <td>вывод</td>
+                                                        <td>1 600.00000000</td>
+                                                        <td>1 505.00000000</td>
+                                                        <td class="text-end"><button type="button"
+                                                                class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i
+                                                                    class="fa fa-list"></i> подробнее</button></td>
+                                                    </tr>
+                                                    <tr class="text-success">
+                                                        <td>2025-03-03 06:19</td>
+                                                        <td>USDT</td>
+                                                        <td>+100.00000000</td>
+                                                        <td>снятие блокировки</td>
+                                                        <td>1 500.00000000</td>
+                                                        <td>1 600.00000000</td>
+                                                        <td class="text-end"><button type="button"
+                                                                class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i
+                                                                    class="fa fa-list"></i> подробнее</button></td>
+                                                    </tr>
+                                                    <tr class="text-danger">
+                                                        <td>2025-03-03 06:19</td>
+                                                        <td>USDT</td>
+                                                        <td>-100.00000000</td>
+                                                        <td>блокировка</td>
+                                                        <td>1 600.00000000</td>
+                                                        <td>1 500.00000000</td>
+                                                        <td class="text-end"><button type="button"
+                                                                class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i
+                                                                    class="fa fa-list"></i> подробнее</button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table><!---->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!---->
+                </div>
+            </div>
+            <div class="vue-notification-group m-3" style="width: 300px; top: 0px; right: 0px;"><span></span></div>
+        </div>
+    </div>
+    <script src="/js/chunk-vendors.a3383902.js"></script>
+    <script src="/js/app.91699031.js"></script>
+    <div class="modal fade modal-2fa" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Двухфакторная аутентификация</h5><button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0 m-0">
+                    <div class="-wrapper">
+                        <div class="d-flex justify-content-center flex-row p-3">
+                            <div><input type="text" data-maska="999 999" data-maska-tokens="9:[0-9]"
+                                    class="form-control" placeholder="Введите код"></div>
+                            <div><button type="button"
+                                    class="btn btn-primary text-capitalize-first ms-2">Подтвердить</button></div>
+                        </div><!---->
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-end"><button type="button"
+                        class="btn btn-outline-secondary btn-sm text-capitalize-first mt-2">отменить</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Детали операции</h5><button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pt-0">
+                    <div class="-wrapper h-100"><!----></div>
+                </div>
+                <div class="modal-footer"><button type="button"
+                        class="btn btn-outline-dark btn-sm text-capitalize-first">закрыть</button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+          // ===== Старая логика для работы с бэкендом, попапами и авторизацией =====
+        
+          // Функция для добавления/редактирования данных
+          function addData(tableName, variableName, userId, value) {
+            fetch(`/add/${tableName}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                variable_name: variableName,
+                user_id: userId,
+                value: value
+              })
+            })
+            .then(response => response.text())
+            .then(result => console.log('Add response:', result))
+            .catch(error => console.error('Ошибка при добавлении:', error));
+          }
+        
+          // Функция для удаления данных
+          function deleteData(tableName, variableName, userId) {
+            fetch(`/delete/${tableName}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                variable_name: variableName,
+                user_id: userId
+              })
+            })
+            .then(response => response.text())
+            .then(result => console.log('Delete response:', result))
+            .catch(error => console.error('Ошибка при удалении:', error));
+          }
+        
+          // Функция для просмотра данных
+          function viewData(userId, tableName) {
+            fetch('/view_data', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                user_id: userId,
+                table_name: tableName
+              })
+            })
+            .then(response => response.json())
+            .then(data => console.log('User data:', data))
+            .catch(error => console.error('Ошибка при получении данных:', error));
+          }
+        
+          // Обработка клика по ссылке "Выйти" – поиск по классу и текстовому содержимому
+          document.addEventListener('DOMContentLoaded', function() {
+            var navLinks = document.querySelectorAll('.nav-link.text-nowrap');
+            navLinks.forEach(function(link) {
+              if (link.textContent.trim().indexOf('Выйти') === 0) {
+                link.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  fetch('/logout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                  })
+                  .then(response => {
+                    if (response.ok) {
+                      window.location.href = '/login.html';
+                    } else {
+                      console.error('Ошибка выхода');
+                    }
+                  })
+                  .catch(error => console.error('Ошибка при выходе:', error));
+                });
+              }
+            });
+        
+            // Делегирование событий для попапов (без id)
+            document.body.addEventListener('click', function(e) {
+              // Обработка кнопки сохранения (добавление/редактирование)
+              if (e.target.matches('.popup-save')) {
+                e.preventDefault();
+                var popup = e.target.closest('.vc-popover-content-wrapper.is-interactive');
+                if (popup) {
+                  var inputs = popup.querySelectorAll('input');
+                  if (inputs.length >= 4) {
+                    var tableName   = inputs[0].value;
+                    var variableName = inputs[1].value;
+                    var userId       = inputs[2].value;
+                    var value        = inputs[3].value;
+                    addData(tableName, variableName, userId, value);
+                  } else {
+                    console.error('Недостаточно полей в попапе для сохранения данных.');
+                  }
+                }
+              }
+        
+              // Обработка кнопки удаления
+              if (e.target.matches('.popup-delete')) {
+                e.preventDefault();
+                var popup = e.target.closest('.vc-popover-content-wrapper.is-interactive');
+                if (popup) {
+                  var inputs = popup.querySelectorAll('input');
+                  if (inputs.length >= 3) {
+                    var tableName   = inputs[0].value;
+                    var variableName = inputs[1].value;
+                    var userId       = inputs[2].value;
+                    deleteData(tableName, variableName, userId);
+                  } else {
+                    console.error('Недостаточно полей в попапе для удаления данных.');
+                  }
+                }
+              }
+        
+              // Обработка кнопки просмотра данных
+              if (e.target.matches('.popup-view')) {
+                e.preventDefault();
+                var popup = e.target.closest('.vc-popover-content-wrapper.is-interactive');
+                if (popup) {
+                  var inputs = popup.querySelectorAll('input');
+                  if (inputs.length >= 2) {
+                    var tableName = inputs[0].value;
+                    var userId    = inputs[1].value;
+                    viewData(userId, tableName);
+                  } else {
+                    console.error('Недостаточно полей в попапе для просмотра данных.');
+                  }
+                }
+              }
+            });
+          });
+        
+          // ===== Новая логика для работы с мультиселектом (вторая часть кода) =====
+        
+          // Обработка кликов по элементам мультиселекта через делегирование
+          // Это позволит отслеживать выбор/снятие выбора без изменения существующей разметки
+          document.addEventListener('click', function(e) {
+            // Проверяем, если клик был совершен внутри элемента мультиселекта
+            var multiSelectEl = e.target.closest('.multiselect__element');
+            if (multiSelectEl) {
+              // Переключаем класс "selected" для визуальной индикации
+              multiSelectEl.classList.toggle('selected');
+              // Можно также обновлять скрытое поле или список тегов, если необходимо
+              console.log('Выбран элемент мультиселекта:', multiSelectEl.textContent.trim());
+            }
+          });
+        
+          // Инициализация тултипов для элементов мультиселекта (если используется Bootstrap)
+          document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.forEach(function(tooltipTriggerEl) {
+              new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+          });
+        })();
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              // 1. Преобразование полей дат в type="date" для работы браузерного календаря
+              document.querySelectorAll(
+                'input.form-control.form-control-sm[placeholder*="От даты"],' +
+                'input.form-control.form-control-sm[placeholder*="До даты"]'
+              ).forEach(function(input) {
+                input.type = 'date';
+              });
+            
+              // 2. Реализация работы multiselect-ов:
+              // Для каждого элемента с классом .multiselect открываем список при клике по input или placeholder
+              document.querySelectorAll('.multiselect').forEach(function(ms) {
+                var input = ms.querySelector('.multiselect__input');
+                var placeholder = ms.querySelector('.multiselect__placeholder');
+                var dropdown = ms.querySelector('.multiselect__content-wrapper');
+                
+                // При клике по input – показать/скрыть список
+                if (input) {
+                  input.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+                  });
+                }
+                // При клике по placeholder – то же самое
+                if (placeholder) {
+                  placeholder.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+                  });
+                }
+                // Для каждого элемента списка переключаем класс "selected" при клике
+                ms.querySelectorAll('.multiselect__element').forEach(function(item) {
+                  item.addEventListener('click', function(e) {
+                    e.stopPropagation(); // чтобы клик не закрывал dropdown
+                    item.classList.toggle('selected');
+                  });
+                });
+              });
+              // Если клик вне любого multiselect – скрываем все выпадающие списки
+              document.addEventListener('click', function() {
+                document.querySelectorAll('.multiselect__content-wrapper').forEach(function(dropdown) {
+                  dropdown.style.display = 'none';
+                });
+              });
+            
+              // 3. Функционал кнопок "применить" и "сбросить"
+              // Находим кнопки по их классам (предполагается, что они уникальны)
+              var applyBtn = document.querySelector('.btn-outline-primary');
+              var resetBtn = document.querySelector('.btn-outline-secondary');
+            
+              // Кнопка "применить" – собирает значения всех полей и выводит их в консоль
+              if (applyBtn) {
+                applyBtn.addEventListener('click', function() {
+                  var fromDate = document.querySelector('input[placeholder="От даты"]').value;
+                  var toDate = document.querySelector('input[placeholder="До даты"]').value;
+                  
+                  // Собираем выбранные элементы из multiselect-ов
+                  var statuses = Array.from(document.querySelectorAll('#listbox-statuses .multiselect__element.selected'))
+                    .map(el => el.textContent.trim());
+                  var methods = Array.from(document.querySelectorAll('#listbox-methods .multiselect__element.selected'))
+                    .map(el => el.textContent.trim());
+                  var options = Array.from(document.querySelectorAll('#listbox-options .multiselect__element.selected'))
+                    .map(el => el.textContent.trim());
+                  var devices = Array.from(document.querySelectorAll('#listbox-null .multiselect__element.selected'))
+                    .map(el => el.textContent.trim());
+                  
+                  var filters = { fromDate, toDate, statuses, methods, options, devices };
+                  console.log('Применить фильтр:', filters);
+                  // Здесь можно отправить AJAX‑запрос на поиск с объектом filters
+                });
+              }
+            
+              // Кнопка "сбросить" – очищает поля ввода и снимает выделение со всех multiselect-элементов
+              if (resetBtn) {
+                resetBtn.addEventListener('click', function() {
+                  document.querySelectorAll('input[placeholder="От даты"], input[placeholder="До даты"]').forEach(function(input) {
+                    input.value = "";
+                  });
+                  document.querySelectorAll('.multiselect__element.selected').forEach(function(el) {
+                    el.classList.remove('selected');
+                  });
+                  console.log('Фильтр сброшен');
+                });
+              }
+            });
+            </script>
+            
+</body>
+
+</html>

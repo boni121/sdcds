@@ -1,0 +1,958 @@
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.f979c78b.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chunk-vendors.ae7abc5c.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dashboard</title>
+    <script>window.API_URL = 'https://api.brabus.work/api/frontend';
+        window.X_GA_REF = 'GA1.1.1620887114.1716834560';</script>
+    <script src="/js/pdf.js" type="module"></script>
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link href="/css/app.f979c78b.css" rel="pre" as="style">
+    <link href="/css/chunk-vendors.ae7abc5c.css" rel="pre" as="style">
+    <link href="/js/app.91699031.js" rel="pre" as="script">
+    <link href="/js/chunk-vendors.a3383902.js" rel="pre" as="script">
+    <link href="/css/chunk-vendors.ae7abc5c.css" rel="stylesheet">
+    <link href="/css/app.f979c78b.css" rel="stylesheet">
+    <style>
+        .vue-notification-group {
+            display: block;
+            position: fixed;
+            z-index: 5000
+        }
+
+        .vue-notification-wrapper {
+            display: block;
+            overflow: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0
+        }
+
+        .notification-title {
+            font-weight: 600
+        }
+
+        .vue-notification-template {
+            display: block;
+            box-sizing: border-box;
+            background: white;
+            text-align: left
+        }
+
+        .vue-notification {
+            display: block;
+            box-sizing: border-box;
+            text-align: left;
+            font-size: 12px;
+            padding: 10px;
+            margin: 0 5px 5px;
+            color: #fff;
+            background: #44A4FC;
+            border-left: 5px solid #187FE7
+        }
+
+        .vue-notification.warn {
+            background: #ffb648;
+            border-left-color: #f48a06
+        }
+
+        .vue-notification.error {
+            background: #E54D42;
+            border-left-color: #b82e24
+        }
+
+        .vue-notification.success {
+            background: #68CD86;
+            border-left-color: #42a85f
+        }
+
+        .vn-fade-enter-active,
+        .vn-fade-leave-active,
+        .vn-fade-move {
+            transition: all .5s
+        }
+
+        .vn-fade-enter-from,
+        .vn-fade-leave-to {
+            opacity: 0
+        }
+    </style>
+</head>
+
+<body><noscript><strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to
+            continue.</strong></noscript>
+    <div id="app" data-v-app="">
+        <div id="app"><!---->
+            <header data-v-e9038fd2="" class="" id="header-main">
+                <nav data-v-e9038fd2="" class="navbar navbar-main navbar-expand-lg shadow-sm navbar-light bg-white p-0"
+                    id="navbar-main">
+                    <div data-v-e9038fd2="" class="w-100"><button data-v-e9038fd2=""
+                            class="navbar-toggler order-lg-2 p-2 w-100" type="button" data-toggle="collapse"
+                            data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse"
+                            aria-expanded="false" aria-label="Toggle navigation"><span data-v-e9038fd2=""
+                                class="navbar-toggler-icon"></span></button>
+                        <div data-v-e9038fd2="" class="collapse navbar-collapse navbar-collapse-overlay order-lg-3"
+                            id="navbar-main-collapse" style="top: 3rem; bottom: 1rem;">
+                            <div data-v-e9038fd2="" class="position-relative float-end" style="display: none;"><button
+                                    data-v-e9038fd2="" class="navbar-toggler m-2" type="button" data-toggle="collapse"
+                                    data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse"
+                                    aria-expanded="false" aria-label="Toggle navigation"><svg data-v-e9038fd2=""
+                                        xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-x">
+                                        <line data-v-e9038fd2="" x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line data-v-e9038fd2="" x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg></button></div>
+                            <ul data-v-e9038fd2="" class="navbar-nav ms-3 overflow-auto pe-3">
+                                <li data-v-e9038fd2=""
+                                    class="nav-item nav-item-spaced d-lg-block text-nowrap border-end pe-3 me-3">
+                                    <div data-v-e9038fd2="" class="d-flex h-100 align-items-center"><a
+                                            data-v-e9038fd2="" href="/" class="text-capitalize nav-link p-0 active"><img
+                                                data-v-e9038fd2="" alt="ваше название" src="/apple-touch-icon.png" class=""
+                                                style="height: 30px;"><span data-v-e9038fd2=""
+                                                class="ms-2">ваше название</span></a></div>
+                                </li><!---->
+                                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a
+                                        data-v-e9038fd2="" href="/" class="nav-link text-capitalize-first"><span
+                                            data-v-e9038fd2="">Главная</span></a></li>
+                                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a
+                                        data-v-e9038fd2="" href="/statistic.html"
+                                        class="nav-link text-capitalize-first"><span
+                                            data-v-e9038fd2="">Статистика</span></a></li>
+                                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a
+                                        data-v-e9038fd2="" href="/account-operations.html"
+                                        class="nav-link text-capitalize-first"><span data-v-e9038fd2="">история
+                                            операций</span></a></li>
+                                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a
+                                        data-v-e9038fd2="" href="/deals.html"
+                                        class="nav-link text-capitalize-first"><span
+                                            data-v-e9038fd2="">сделки</span></a></li>
+                                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a
+                                        data-v-e9038fd2="" href="/requisites.html"
+                                        class="nav-link text-capitalize-first"><span
+                                            data-v-e9038fd2="">реквизиты</span></a></li>
+                                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a
+                                        data-v-e9038fd2="" href="/settings.html"
+                                        class="nav-link text-capitalize-first active" aria-current="page"><span
+                                            data-v-e9038fd2="">настройки</span></a></li>
+                            </ul>
+                            <ul data-v-e9038fd2="" class="navbar-nav align-items-lg-center d-lg-flex ms-3 ms-lg-auto">
+                                <li data-v-e9038fd2="" class="nav-item mt-2 mb-2">
+                                    <div data-v-e9038fd2="" class="d-flex flex-row align-items-center gap-2"><label
+                                            data-v-e9038fd2="" for="traderStatus" class="badge bg-danger">прием</label>
+                                        <div data-v-e9038fd2="" class="form-switch"><input data-v-e9038fd2=""
+                                                id="traderStatus" class="form-check-input" type="checkbox" role="switch"
+                                                style="cursor: pointer;"></div>
+                                    </div>
+                                </li>
+                                <li data-v-e9038fd2="" class="nav-item mt-2 mb-2 me-5">
+                                    <div data-v-e9038fd2="" class="d-flex flex-row align-items-center gap-2"><label
+                                            data-v-e9038fd2="" for="traderPayOutStatus"
+                                            class="badge bg-danger">выплата</label>
+                                        <div data-v-e9038fd2="" class="form-switch"><input data-v-e9038fd2=""
+                                                id="traderPayOutStatus" class="form-check-input" type="checkbox"
+                                                role="switch" style="cursor: pointer;"></div>
+                                    </div>
+                                </li><!---->
+                                <li data-v-e9038fd2="" class="nav-item"><a data-v-e9038fd2=""
+                                        class="nav-link text-nowrap" href="#">Выйти (Loading...) </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <div class="pl-2 pr-2">
+                <div class="m-4"><!---->
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 offset-md-3">
+                            <h5 class="ms-3 me-3 mb-0 text-center text-capitalize-first">Двухфакторная аутентификация
+                            </h5>
+                        </div>
+                        <div class="col-sm-12 col-md-6 offset-md-3">
+                            <div class="card card-body">
+                                <div class="-wrapper">
+                                    <div class="row"><label
+                                            class="col-sm-4 col-form-label text-capitalize-first">Статус:</label>
+                                        <div class="col-sm-8"><span
+                                                class="text-success">включено</span><!----><!----><button type="button"
+                                                class="btn btn-danger ms-2 btn-sm text-capitalize-first">отключить</button>
+                                        </div>
+                                    </div><!---->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 offset-md-3">
+                            <h5 class="ms-3 me-3 mb-0 text-center text-capitalize-first">Telegram</h5>
+                        </div>
+                        <div class="col-sm-12 col-md-6 offset-md-3">
+                            <div class="-wrapper">
+                                <div class="card card-body">
+                                    <div class="row"><label class="col-sm-4 col-form-label text-capitalize-first">Бот
+                                            уведомлений:</label>
+                                        <div class="col-sm-8"><span class="text-primary">@BagaTTTO</span><!----><button
+                                                type="button" class="btn btn-sm btn-danger ms-2"><i
+                                                    class="fa fa-times"></i> Отвязать аккаунт</button><!----><a href=""
+                                                target="_blank" style="display: none;"></a></div>
+                                    </div>
+                                    <div class="row"><label
+                                            class="col-sm-4 col-form-label text-capitalize-first">Уведомления:</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="offset-sm-4 col-sm-8">
+                                            <div class="form-check small mb-0"><input class="form-check-input"
+                                                    type="checkbox" id="deal_canceled" value="deal_canceled"><label
+                                                    class="form-check-label" for="deal_canceled">Сделка отменена</label>
+                                            </div>
+                                        </div>
+                                        <div class="offset-sm-4 col-sm-8">
+                                            <div class="form-check small mb-0"><input class="form-check-input"
+                                                    type="checkbox" id="deal_completed" value="deal_completed"><label
+                                                    class="form-check-label" for="deal_completed">Сделка
+                                                    завершена</label></div>
+                                        </div>
+                                        <div class="offset-sm-4 col-sm-8">
+                                            <div class="form-check small mb-0"><input class="form-check-input"
+                                                    type="checkbox" id="deal_created" value="deal_created"><label
+                                                    class="form-check-label" for="deal_created">Новая сделка на
+                                                    прием</label></div>
+                                        </div>
+                                        <div class="offset-sm-4 col-sm-8">
+                                            <div class="form-check small mb-0"><input class="form-check-input"
+                                                    type="checkbox" id="deal_disputed" value="deal_disputed"><label
+                                                    class="form-check-label" for="deal_disputed">Открыт диспут
+                                                    (бот)</label></div>
+                                        </div>
+                                        <div class="offset-sm-4 col-sm-8">
+                                            <div class="form-check small mb-0"><input class="form-check-input"
+                                                    type="checkbox" id="deal_disputed_group_chat"
+                                                    value="deal_disputed_group_chat"><label class="form-check-label"
+                                                    for="deal_disputed_group_chat">Открыт диспут (группа)</label></div>
+                                        </div>
+                                        <div class="offset-sm-4 col-sm-8">
+                                            <div class="form-check small mb-0"><input class="form-check-input"
+                                                    type="checkbox" id="deal_not_found" value="deal_not_found"><label
+                                                    class="form-check-label" for="deal_not_found">Сделка не
+                                                    найдена</label></div>
+                                        </div>
+                                        <div class="offset-sm-4 col-sm-8">
+                                            <div class="form-check small mb-0"><input class="form-check-input"
+                                                    type="checkbox" id="deal_transfer_completed"
+                                                    value="deal_transfer_completed"><label class="form-check-label"
+                                                    for="deal_transfer_completed">Подтверждение перевода по
+                                                    сделке</label></div>
+                                        </div>
+                                        <div class="offset-sm-4 col-sm-8">
+                                            <div class="form-check small mb-0"><input class="form-check-input"
+                                                    type="checkbox" id="pay_out_deal_accepted"
+                                                    value="pay_out_deal_accepted"><label class="form-check-label"
+                                                    for="pay_out_deal_accepted">Принятие сделки по выплатам</label>
+                                            </div>
+                                        </div>
+                                        <div class="offset-sm-4 col-sm-8">
+                                            <div class="form-check small mb-0"><input class="form-check-input"
+                                                    type="checkbox" id="pay_out_deal_assigned"
+                                                    value="pay_out_deal_assigned"><label class="form-check-label"
+                                                    for="pay_out_deal_assigned">Новая сделка по выплатам</label></div>
+                                        </div>
+                                        <div class="offset-sm-4 col-sm-8">
+                                            <div class="form-check small mb-0"><input class="form-check-input"
+                                                    type="checkbox" id="pay_out_deal_refused"
+                                                    value="pay_out_deal_refused"><label class="form-check-label"
+                                                    for="pay_out_deal_refused">Отмена сделки по выплатам</label></div>
+                                        </div>
+                                        <div class="offset-sm-4 col-sm-8"><button type="button"
+                                                class="btn btn-outline-success btn-sm text-capitalize-first">сохранить</button>
+                                        </div>
+                                    </div>
+                                </div><!---->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 offset-md-3">
+                            <h5 class="ms-3 me-3 mb-0 text-center">Профиль</h5>
+                        </div>
+                        <div class="col-sm-12 col-md-6 offset-md-3">
+                            <div class="card">
+                                <div class="-wrapper">
+                                    <div class="card-body">
+                                        <div class="mb-3 row"><label for="timezone"
+                                                class="col-sm-4 col-form-label text-capitalize-first">Таймзона:</label>
+                                            <div class="col-sm-4">
+                                                <form name="timezone-select" autocomplete="off">
+                                                    <div tabindex="-1" class="multiselect multiselect-sm"
+                                                        role="combobox" aria-owns="listbox-timezone"
+                                                        autocomplete="timezone">
+                                                        <div class="multiselect__select"></div>
+                                                        <div class="multiselect__tags">
+                                                            <div class="multiselect__tags-wrap" style="display: none;">
+                                                            </div><!--v-if-->
+                                                            <div class="multiselect__spinner" style="display: none;">
+                                                            </div><input name="timezone" id="timezone" type="text"
+                                                                autocomplete="off" spellcheck="false"
+                                                                placeholder="Select option" tabindex="0"
+                                                                class="multiselect__input"
+                                                                aria-controls="listbox-timezone"
+                                                                style="width: 0px; position: absolute; padding: 0px;"><span
+                                                                class="multiselect__single">Europe/Moscow</span><!--v-if-->
+                                                        </div>
+                                                        <div class="multiselect__content-wrapper" tabindex="-1"
+                                                            style="max-height: 300px; display: none;">
+                                                            <ul class="multiselect__content" role="listbox"
+                                                                id="listbox-timezone" style="display: inline-block;">
+                                                                <!--v-if-->
+                                                                <li class="multiselect__element" id="timezone-0"
+                                                                    role="option"><span
+                                                                        class="multiselect__option--highlight multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Abidjan</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-1"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Accra</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-2"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Addis_Ababa</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-3"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Algiers</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-4"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Asmara</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-5"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Asmera</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-6"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Bamako</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-7"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Bangui</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-8"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Banjul</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-9"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Bissau</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-10"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Blantyre</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-11"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Brazzaville</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-12"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Bujumbura</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-13"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Cairo</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-14"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Casablanca</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-15"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Ceuta</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-16"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Conakry</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-17"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Dakar</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-18"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Dar_es_Salaam</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-19"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Djibouti</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-20"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Douala</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-21"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/El_Aaiun</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-22"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Freetown</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-23"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Gaborone</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-24"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Harare</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-25"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Johannesburg</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-26"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Juba</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-27"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Kampala</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-28"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Khartoum</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-29"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Kigali</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-30"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Kinshasa</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-31"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Lagos</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-32"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Libreville</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-33"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Lome</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-34"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Luanda</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-35"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Lubumbashi</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-36"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Lusaka</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-37"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Malabo</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-38"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Maputo</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-39"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Maseru</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-40"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Mbabane</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-41"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Mogadishu</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-42"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Monrovia</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-43"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Nairobi</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-44"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Ndjamena</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-45"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Niamey</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-46"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Nouakchott</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-47"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Ouagadougou</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-48"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Porto-Novo</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-49"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Sao_Tome</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-50"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Timbuktu</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-51"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Tripoli</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-52"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Tunis</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-53"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>Africa/Windhoek</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-54"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Adak</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-55"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Anchorage</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-56"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Anguilla</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-57"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Antigua</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-58"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Araguaina</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-59"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Argentina/Buenos_Aires</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-60"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Argentina/Catamarca</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-61"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Argentina/ComodRivadavia</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-62"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Argentina/Cordoba</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-63"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Argentina/Jujuy</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-64"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Argentina/La_Rioja</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-65"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Argentina/Mendoza</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-66"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Argentina/Rio_Gallegos</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-67"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Argentina/Salta</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-68"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Argentina/San_Juan</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-69"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Argentina/San_Luis</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-70"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Argentina/Tucuman</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-71"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Argentina/Ushuaia</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-72"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Aruba</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-73"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Asuncion</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-74"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Atikokan</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-75"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Atka</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-76"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Bahia</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-77"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Bahia_Banderas</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-78"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Barbados</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-79"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Belem</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-80"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Belize</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-81"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Blanc-Sablon</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-82"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Boa_Vista</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-83"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Bogota</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-84"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Boise</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-85"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Buenos_Aires</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-86"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Cambridge_Bay</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-87"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Campo_Grande</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-88"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Cancun</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-89"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Caracas</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-90"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Catamarca</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-91"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Cayenne</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-92"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Cayman</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-93"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Chicago</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-94"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Chihuahua</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-95"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Ciudad_Juarez</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-96"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Coral_Harbour</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-97"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Cordoba</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-98"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Costa_Rica</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="timezone-99"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>America/Creston</span></span><!--v-if-->
+                                                                </li>
+                                                                <li style="display: none;"><span
+                                                                        class="multiselect__option">No elements found.
+                                                                        Consider changing the search query.</span></li>
+                                                                <li style="display: none;"><span
+                                                                        class="multiselect__option">List is
+                                                                        empty.</span></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row"><label for="lang"
+                                                class="col-sm-4 col-form-label text-capitalize-first">Язык:</label>
+                                            <div class="col-sm-4">
+                                                <form name="lang-select" autocomplete="off">
+                                                    <div tabindex="-1" class="multiselect multiselect-sm"
+                                                        role="combobox" aria-owns="listbox-lang" autocomplete="lang">
+                                                        <div class="multiselect__select"></div>
+                                                        <div class="multiselect__tags">
+                                                            <div class="multiselect__tags-wrap" style="display: none;">
+                                                            </div><!--v-if-->
+                                                            <div class="multiselect__spinner" style="display: none;">
+                                                            </div><input name="lang" id="lang" type="text"
+                                                                autocomplete="off" spellcheck="false"
+                                                                placeholder="Select option" tabindex="0"
+                                                                class="multiselect__input" aria-controls="listbox-lang"
+                                                                style="width: 0px; position: absolute; padding: 0px;"><span
+                                                                class="multiselect__single">ru</span><!--v-if-->
+                                                        </div>
+                                                        <div class="multiselect__content-wrapper" tabindex="-1"
+                                                            style="max-height: 300px; display: none;">
+                                                            <ul class="multiselect__content" role="listbox"
+                                                                id="listbox-lang" style="display: inline-block;">
+                                                                <!--v-if-->
+                                                                <li class="multiselect__element" id="lang-0"
+                                                                    role="option"><span
+                                                                        class="multiselect__option--highlight multiselect__option--selected multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>ru</span></span><!--v-if-->
+                                                                </li>
+                                                                <li class="multiselect__element" id="lang-1"
+                                                                    role="option"><span class="multiselect__option"
+                                                                        data-select="Select" data-selected="Selected"
+                                                                        data-deselect="Press enter to remove"><span>en</span></span><!--v-if-->
+                                                                </li>
+                                                                <li style="display: none;"><span
+                                                                        class="multiselect__option">No elements found.
+                                                                        Consider changing the search query.</span></li>
+                                                                <li style="display: none;"><span
+                                                                        class="multiselect__option">List is
+                                                                        empty.</span></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="mb-1 row"><label for="inputPassword"
+                                                class="col-sm-4 col-form-label text-capitalize-first">новый
+                                                пароль:</label>
+                                            <div class="col-sm-4">
+                                                <form name="change-pwd-new" autocomplete="off"><input type="password"
+                                                        autocomplete="off" name="pwd-new"
+                                                        class="form-control form-control-sm" id="inputPassword"></form>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row"><label for="inputPasswordConf"
+                                                class="col-sm-4 col-form-label text-capitalize-first">подтвердите
+                                                пароль:</label>
+                                            <div class="col-sm-4">
+                                                <form name="change-pwd-new-repeat" autocomplete="off"><input
+                                                        type="password" autocomplete="off" name="pwd-new-repeat"
+                                                        class="form-control form-control-sm" id="inputPasswordConf">
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="mb-1 row">
+                                            <div class="col-sm-8 text-end"><button type="button"
+                                                    class="btn btn-sm btn-primary text-capitalize-first">Сохранить
+                                                    изменения</button></div>
+                                        </div>
+                                    </div><!---->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vue-notification-group m-3" style="width: 300px; top: 0px; right: 0px;"><span></span></div>
+        </div>
+    </div>
+    <script src="/js/chunk-vendors.a3383902.js"></script>
+    <script src="/js/app.91699031.js"></script>
+    <div class="modal fade modal-2fa" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Двухфакторная аутентификация</h5><button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0 m-0">
+                    <div class="-wrapper">
+                        <div class="d-flex justify-content-center flex-row p-3">
+                            <div><input type="text" data-maska="999 999" data-maska-tokens="9:[0-9]"
+                                    class="form-control" placeholder="Введите код"></div>
+                            <div><button type="button"
+                                    class="btn btn-primary text-capitalize-first ms-2">Подтвердить</button></div>
+                        </div><!---->
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-end"><button type="button"
+                        class="btn btn-outline-secondary btn-sm text-capitalize-first mt-2">отменить</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Двухфакторная аутентификация</h5><button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>Шаг 1: Отсканируйте QR-код с помощью вашего телефона</div>
+                    <div class="d-flex justify-content-center"><!----></div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <div class="input-group input-group-sm"><input type="text"
+                                class="form-control form-control-sm font-monospace" readonly=""><a class="btn btn-copy"
+                                style="cursor: pointer;"><span class="subtext copied-text-absolute">скопировано</span><i
+                                    class="fa-regular fa-copy"></i></a></div>
+                    </div>
+                    <div>Шаг 2: Введите проверочный код</div><!---->
+                </div>
+                <div class="modal-footer d-flex justify-content-end"><button type="button"
+                        class="btn btn-outline-dark btn-sm text-capitalize-first">отменить</button></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!-- Add APK Upload/Download functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Find all Android buttons (green buttons with Android icon)
+    const androidButtons = document.querySelectorAll('.btn-outline-success .fa-brands.fa-android');
+
+    androidButtons.forEach(button => {
+        const btnElement = button.closest('button');
+        btnElement.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // Get the device ID from the row
+            const deviceRow = this.closest('tr');
+            const deviceIdSpan = deviceRow.querySelector('td:first-child span');
+            const deviceId = deviceIdSpan.getAttribute('data-bs-original-title');
+            const deviceName = deviceRow.querySelector('td:nth-child(2)').textContent.trim().split(' ').pop();
+
+            // Create modal for APK upload/download
+            const modal = document.createElement('div');
+            modal.className = 'modal fade';
+            modal.id = 'apkModal';
+            modal.setAttribute('tabindex', '-1');
+            modal.setAttribute('aria-labelledby', 'apkModalLabel');
+            modal.setAttribute('aria-hidden', 'true');
+
+            modal.innerHTML = `
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="apkModalLabel">APK файл для устройства ${deviceName}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="apkCurrentFile"></div>
+                            <div class="mb-3">
+                                <label for="apkFile" class="form-label">Выберите APK файл</label>
+                                <input class="form-control" type="file" id="apkFile" accept=".apk">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                            <button type="button" class="btn btn-success" id="downloadApkBtn">Скачать APK</button>
+                            <button type="button" class="btn btn-primary" id="uploadApkBtn">Загрузить</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            // Initialize the modal
+            const bsModal = new bootstrap.Modal(modal);
+            bsModal.show();
+
+            // Check if device already has an APK file
+            fetch(`/download_apk/${deviceId}`, {
+                method: 'HEAD'
+            })
+            .then(response => {
+                const apkCurrentFile = document.getElementById('apkCurrentFile');
+                const downloadBtn = document.getElementById('downloadApkBtn');
+
+                if (response.ok) {
+                    apkCurrentFile.innerHTML = `
+                        <div class="alert alert-info">
+                            У устройства уже есть загруженный APK файл.
+                        </div>
+                    `;
+                    downloadBtn.disabled = false;
+                } else {
+                    apkCurrentFile.innerHTML = `
+                        <div class="alert alert-warning">
+                            APK файл не найден для этого устройства.
+                        </div>
+                    `;
+                    downloadBtn.disabled = true;
+                }
+            });
+
+            // Download APK
+            document.getElementById('downloadApkBtn').addEventListener('click', function() {
+                window.location.href = `/download_apk/${deviceId}`;
+            });
+
+            // Upload APK
+            document.getElementById('uploadApkBtn').addEventListener('click', function() {
+                const fileInput = document.getElementById('apkFile');
+                const file = fileInput.files[0];
+
+                if (!file) {
+                    alert('Пожалуйста, выберите APK файл.');
+                    return;
+                }
+
+                if (!file.name.endsWith('.apk')) {
+                    alert('Выбранный файл должен быть формата APK.');
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('file', file);
+
+                fetch(`/upload_apk/${deviceId}`, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('APK файл успешно загружен.');
+                        bsModal.hide();
+                        modal.remove();
+                    } else {
+                        alert('Ошибка: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Произошла ошибка при загрузке файла.');
+                });
+            });
+
+            // Clean up when modal is closed
+            modal.addEventListener('hidden.bs.modal', function () {
+                modal.remove();
+            });
+        });
+    });
+});
+</script>

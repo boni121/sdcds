@@ -1,0 +1,566 @@
+<html lang="ru">
+
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.f979c78b.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chunk-vendors.ae7abc5c.css') }}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard</title>
+  <style>
+    .modal {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1060;
+      display: none;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      outline: 0;
+    }
+
+    .modal {
+      transition: opacity 0.15s linear;
+    }
+
+    .modal.show .modal-dialog {
+      transform: none;
+    }
+
+    .modal.fade .modal-dialog {
+      transition: transform 0.3s ease-out;
+      transform: translateY(-50px);
+    }
+
+    .fade {
+      transition: opacity .15s linear;
+    }
+
+    .modal.show .modal-dialog {
+      transform: none;
+    }
+
+    .modal.fade .modal-dialog {
+      transition: transform .3s ease-out;
+      transform: translateY(-50px);
+    }
+
+    @media (min-width: 576px) {
+      .modal-dialog {
+        max-width: 500px;
+        margin: 1.75rem auto;
+      }
+    }
+
+    .modal-dialog {
+      position: relative;
+      width: auto;
+      margin: .5rem;
+      pointer-events: none;
+    }
+
+    .modal-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      pointer-events: auto;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid rgba(0, 0, 0, .2);
+      border-radius: .3rem;
+      outline: 0;
+    }
+
+    .modal-header {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1rem;
+      border-bottom: 1px solid #dee2e6;
+      border-top-left-radius: calc(.3rem - 1px);
+      border-top-right-radius: calc(.3rem - 1px);
+    }
+
+    .modal-body {
+      position: relative;
+      flex: 1 1 auto;
+      padding: 1rem;
+    }
+  </style>
+  <script>window.API_URL = 'https://api.brabus.work/api/frontend';
+    window.X_GA_REF = 'GA1.1.1620887114.1716834560';</script>
+  <script src="/js/pdf.js" type="module"></script>
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+  <link rel="manifest" href="/site.webmanifest">
+  <link href="/css/app.f979c78b.css" rel="pre" as="style">
+  <link href="/css/chunk-vendors.ae7abc5c.css" rel="pre" as="style">
+  <link href="/js/app.91699031.js" rel="pre" as="script">
+  <link href="/js/chunk-vendors.a3383902.js" rel="pre" as="script">
+  <link href="/css/chunk-vendors.ae7abc5c.css" rel="stylesheet">
+  <link href="/css/app.f979c78b.css" rel="stylesheet">
+  <style>
+    .vue-notification-group {
+      display: block;
+      position: fixed;
+      z-index: 5000
+    }
+
+    .vue-notification-wrapper {
+      display: block;
+      overflow: hidden;
+      width: 100%;
+      margin: 0;
+      padding: 0
+    }
+
+    .notification-title {
+      font-weight: 600
+    }
+
+    .vue-notification-template {
+      display: block;
+      box-sizing: border-box;
+      background: white;
+      text-align: left
+    }
+
+    .vue-notification {
+      display: block;
+      box-sizing: border-box;
+      text-align: left;
+      font-size: 12px;
+      padding: 10px;
+      margin: 0 5px 5px;
+      color: #fff;
+      background: #44A4FC;
+      border-left: 5px solid #187FE7
+    }
+
+    .vue-notification.warn {
+      background: #ffb648;
+      border-left-color: #f48a06
+    }
+
+    .vue-notification.error {
+      background: #E54D42;
+      border-left-color: #b82e24
+    }
+
+    .vue-notification.success {
+      background: #68CD86;
+      border-left-color: #42a85f
+    }
+
+    .vn-fade-enter-active,
+    .vn-fade-leave-active,
+    .vn-fade-move {
+      transition: all .5s
+    }
+
+    .vn-fade-enter-from,
+    .vn-fade-leave-to {
+      opacity: 0
+    }
+  </style>
+</head>
+
+<body class="" style=""><noscript><strong>We're sorry but this app doesn't work properly without JavaScript enabled.
+      Please enable it to continue.</strong></noscript>
+  <div id="app" data-v-app="">
+    <div id="app"><!---->
+      <header data-v-e9038fd2="" class="" id="header-main">
+        <nav data-v-e9038fd2="" class="navbar navbar-main navbar-expand-lg shadow-sm navbar-light bg-white p-0"
+          id="navbar-main">
+          <div data-v-e9038fd2="" class="w-100"><button data-v-e9038fd2="" class="navbar-toggler order-lg-2 p-2 w-100"
+              type="button" data-toggle="collapse" data-target="#navbar-main-collapse"
+              aria-controls="navbar-main-collapse" aria-expanded="false" aria-label="Toggle navigation"><span
+                data-v-e9038fd2="" class="navbar-toggler-icon"></span></button>
+            <div data-v-e9038fd2="" class="collapse navbar-collapse navbar-collapse-overlay order-lg-3"
+              id="navbar-main-collapse" style="top: 3rem; bottom: 1rem;">
+              <div data-v-e9038fd2="" class="position-relative float-end" style="display: none;"><button
+                  data-v-e9038fd2="" class="navbar-toggler m-2" type="button" data-toggle="collapse"
+                  data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false"
+                  aria-label="Toggle navigation"><svg data-v-e9038fd2="" xmlns="http://www.w3.org/2000/svg" width="1em"
+                    height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                    <line data-v-e9038fd2="" x1="18" y1="6" x2="6" y2="18"></line>
+                    <line data-v-e9038fd2="" x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg></button></div>
+              <ul data-v-e9038fd2="" class="navbar-nav ms-3 overflow-auto pe-3">
+                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap border-end pe-3 me-3">
+                  <div data-v-e9038fd2="" class="d-flex h-100 align-items-center"><a data-v-e9038fd2="" href="/"
+                      class="text-capitalize nav-link p-0 active"><img data-v-e9038fd2="" alt="ваше название"
+                        src="/apple-touch-icon.png" class="" style="height: 30px;"><span data-v-e9038fd2=""
+                        class="ms-2">ваше название</span></a></div>
+                </li><!---->
+                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a data-v-e9038fd2=""
+                    href="/" class="nav-link text-capitalize-first active" aria-current="page"><span
+                      data-v-e9038fd2="">Главная</span></a></li>
+                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a data-v-e9038fd2=""
+                    href="/statistic.html" class="nav-link text-capitalize-first"><span
+                      data-v-e9038fd2="">Статистика</span></a></li>
+                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a data-v-e9038fd2=""
+                    href="/account-operations.html" class="nav-link text-capitalize-first"><span
+                      data-v-e9038fd2="">история операций</span></a></li>
+                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a data-v-e9038fd2=""
+                    href="/deals.html" class="nav-link text-capitalize-first"><span data-v-e9038fd2="">сделки</span></a>
+                </li>
+                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a data-v-e9038fd2=""
+                    href="/requisites.html" class="nav-link text-capitalize-first"><span
+                      data-v-e9038fd2="">реквизиты</span></a></li>
+                <li data-v-e9038fd2="" class="nav-item nav-item-spaced d-lg-block text-nowrap"><a data-v-e9038fd2=""
+                    href="/settings.html" class="nav-link text-capitalize-first"><span
+                      data-v-e9038fd2="">настройки</span></a></li>
+              </ul>
+              <ul data-v-e9038fd2="" class="navbar-nav align-items-lg-center d-lg-flex ms-3 ms-lg-auto">
+                <li data-v-e9038fd2="" class="nav-item mt-2 mb-2">
+                  <div data-v-e9038fd2="" class="d-flex flex-row align-items-center gap-2"><label data-v-e9038fd2=""
+                      for="traderStatus" class="badge bg-danger">прием</label>
+                    <div data-v-e9038fd2="" class="form-switch"><input data-v-e9038fd2="" id="traderStatus"
+                        class="form-check-input" type="checkbox" role="switch" style="cursor: pointer;"></div>
+                  </div>
+                </li>
+                <li data-v-e9038fd2="" class="nav-item mt-2 mb-2 me-5">
+                  <div data-v-e9038fd2="" class="d-flex flex-row align-items-center gap-2"><label data-v-e9038fd2=""
+                      for="traderPayOutStatus" class="badge bg-danger">выплата</label>
+                    <div data-v-e9038fd2="" class="form-switch"><input data-v-e9038fd2="" id="traderPayOutStatus"
+                        class="form-check-input" type="checkbox" role="switch" style="cursor: pointer;"></div>
+                  </div>
+                </li><!---->
+                <li data-v-e9038fd2="" class="nav-item"><a data-v-e9038fd2="" class="nav-link text-nowrap"
+                    href="#">Выйти (Loading...) </a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div class="pl-2 pr-2">
+        <div class="-wrapper h-100">
+          <div id="accounts" class="row m-4 mt-0">
+            <div class="col-sm-12 col-md-6 offset-md-3">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="card card-body">
+                    <div><span class="m-0 text-capitalize-first"><strong>Торговое вознаграждение</strong></span></div>
+                    <div class="mt-2"><span class="d-block text-capitalize-first">прием</span>
+                      <div class="d-flex gap-3"><span class="m-0 text-capitalize-first"><span>S - LINE :</span><strong
+                            class="ms-1">7.0% <!----></strong></span><span class="m-0 text-capitalize-first"><span>N -
+                            LINE:</span><strong class="ms-1">7.0% <!----></strong></span><span
+                          class="m-0 text-capitalize-first"><span>RoyalEX:</span><strong class="ms-1">7.0%
+                            <!----></strong></span><span class="m-0 text-capitalize-first"><span>EX++:</span><strong
+                            class="ms-1">7.0% <!----></strong></span></div>
+                    </div>
+                    <div class="mt-2"><span class="d-block text-capitalize-first">выплата</span>
+                      <div class="d-flex gap-3"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <h5 class="ms-3 me-3 mb-0 text-center mt-2">Аккаунты:</h5>
+                </div>
+                <div class="col-sm-12">
+                  <div class="card card-body">
+                    <div class="d-flex justify-content-between gap-3 flex-wrap">
+                      <div class="d-flex align-items-center p-0"><img class="account-currency-icon"
+                          src="/img/USDT_TRC20.4349296f.svg" alt="USDT">
+                        <div class="account-sum"><!----><span class="account-amount text-nowrap">0.00000000 USDT</span>
+                          <div class="d-flex flex-row align-items-center"><!----><span class="text-success"
+                              style="font-size: 70%;">Страховой лимит: 0.00 / 0.00 USDT</span></div><span
+                            class="on-hold">заблокировано: 0.00000000 USDT</span>
+                        </div>
+                      </div>
+                      <div class="d-flex gap-2 align-items-center pe-1 ps-1"><a
+                          href="/account-operations.html?currency=USDT"
+                          class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i class="fa fa-list"></i>
+                          история</a><button type="button"
+                          class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i class="fa-solid fa-up"></i>
+                          вывести</button><button type="button"
+                          class="btn btn-sm btn-outline-dark text-nowrap text-capitalize"><i
+                            class="fa-solid fa-down"></i> пополнить</button></div>
+                    </div>
+                  </div>
+                </div>
+              </div><!---->
+            </div>
+          </div><!---->
+          <div></div><!---->
+        </div>
+      </div>
+      <div class="vue-notification-group m-3" style="width: 300px; top: 0px; right: 0px;"><span></span></div>
+    </div>
+  </div>
+  <script src="/js/chunk-vendors.a3383902.js"></script>
+  <script src="/js/app.91699031.js"></script>
+  <div class="modal fade modal-2fa" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Двухфакторная аутентификация</h5><button type="button" class="btn-close"
+            data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-0 m-0">
+          <div class="-wrapper">
+            <div class="d-flex justify-content-center flex-row p-3">
+              <div><input type="text" data-maska="999 999" data-maska-tokens="9:[0-9]" class="form-control"
+                  placeholder="Введите код"></div>
+              <div><button type="button" class="btn btn-primary text-capitalize-first ms-2">Подтвердить</button></div>
+            </div><!---->
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-end"><button type="button"
+            class="btn btn-outline-secondary btn-sm text-capitalize-first mt-2">отменить</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-capitalize">
+          <h5 class="modal-title">вывод</h5><button type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-0"><!----></div>
+        <div class="modal-footer d-flex justify-content-between"><button type="button"
+            class="btn btn-outline-dark btn-sm text-capitalize-first" id="otMeNaBtn">отменить</button>
+          <div class="-wrapper"><button type="button"
+              class="btn btn-outline-primary btn-sm text-capitalize-first">вывести</button><!----></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-capitalize">
+          <h5 class="modal-title">пополнение</h5><button type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-0">
+          <div class="-wrapper h-100"><!----></div>
+        </div>
+        <div class="modal-footer"><button type="button"
+            class="btn btn-outline-dark btn-sm text-capitalize-first" id="clOsBtn">закрыть</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5><button type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-none"></div>
+        <div class="modal-footer border-top-0 d-flex justify-content-between"><button type="button"
+            class="btn btn-outline-dark btn-sm text-capitalize-first">отменить</button>
+          <div class="-wrapper"><button type="button"
+              class="btn btn-outline-danger btn-sm text-capitalize-first">ок</button><!----></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Находим кнопки "вывести", которые находятся вне модальных окон
+      const triggerButtons = Array.from(document.querySelectorAll("button.btn-outline-dark"))
+        .filter(btn => btn.textContent.trim().toLowerCase().includes("вывести") && !btn.closest(".modal"));
+
+      triggerButtons.forEach(btn => {
+        btn.addEventListener("click", function () {
+          // Перебираем все модальные окна
+          const modals = document.querySelectorAll(".modal");
+          modals.forEach(modal => {
+            const titleElement = modal.querySelector(".modal-title");
+            if (titleElement && titleElement.textContent.trim().toLowerCase() === "вывод") {
+              // Находим блок modal-body внутри модального окна
+              const modalBody = modal.querySelector(".modal-body");
+              // Если содержимое modal-body отсутствует или содержит служебные комментарии, вставляем HTML-разметку
+              if (modalBody && (modalBody.innerHTML.trim() === "" || modalBody.innerHTML.indexOf("!----") !== -1)) {
+                modalBody.innerHTML = `
+    <form>
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <div class="row mt-2">
+            <div class="col-sm-12 d-flex align-items-center p-2 justify-content-center">
+              <div class="d-flex align-items-center p-0">
+                <img class="account-currency-icon" src="/img/USDT_TRC20.4349296f.svg" alt="USDT">
+                <div class="account-sum">
+                  <span class="account-amount text-nowrap">0.00000000 USDT</span>
+                  <div class="d-flex flex-row align-items-center">
+                    <span class="text-success" style="font-size: 70%;">Страховой лимит: 0.00 / 0.00 USDT</span>
+                  </div>
+                  <span class="on-hold">заблокировано: 0.00000000 USDT</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-sm-12 d-flex justify-content-between align-items-center pb-0">
+              <label for="amount" class="col-form-label text-capitalize-first">
+                сумма <a href="#"><small>0.00000000</small></a>
+              </label>
+            </div>
+            <div class="col-sm-12">
+              <div>
+                <input class="form-control" type="text" id="amount">
+              </div>
+            </div>
+            <div>
+              <small>комиссия за вывод составляет 5.00 USDT</small>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-sm-12 d-flex justify-content-between align-items-center pb-0">
+              <label for="address" class="col-form-label text-capitalize-first">
+                Адрес кошелька (USDT TRC20)
+              </label>
+              <a href="#"><small>редактировать вайтлисты</small></a>
+            </div>
+            <div class="col-sm-12">
+              <div>
+                <input class="form-control" type="text" id="address">
+              </div>
+            </div>
+          </div>
+          <div>
+            <span class=""></span>
+          </div>
+        </div>
+      </div>
+    </form>
+                            `;
+              }
+              // Открываем модальное окно: задаём display, добавляем класс show и корректно устанавливаем aria-атрибуты
+              modal.style.display = "flex";
+              modal.classList.add("show");
+              modal.setAttribute("aria-modal", "true");
+              modal.removeAttribute("aria-hidden");
+            }
+          });
+        });
+      });
+
+      // Обработка закрытия модальных окон: при клике на элементы с data-bs-dismiss="modal"
+      const closeElements = document.querySelectorAll('[data-bs-dismiss="modal"]');
+      closeElements.forEach(el => {
+        el.addEventListener("click", function () {
+          const modal = el.closest(".modal");
+          if (modal) {
+            modal.style.display = "none";
+            modal.classList.remove("show");
+            modal.removeAttribute("aria-modal");
+            modal.setAttribute("aria-hidden", "true");
+          }
+        });
+      });
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Находим кнопки "пополнить", которые находятся вне модальных окон
+      const depositButtons = Array.from(document.querySelectorAll("button.btn-outline-dark"))
+        .filter(btn => btn.textContent.trim().toLowerCase().includes("пополнить") && !btn.closest(".modal"));
+
+      depositButtons.forEach(btn => {
+        btn.addEventListener("click", function () {
+          // Перебираем все модальные окна и ищем то, у которого заголовок "пополнение"
+          const modals = document.querySelectorAll(".modal");
+          modals.forEach(modal => {
+            const titleElement = modal.querySelector(".modal-title");
+            if (titleElement && titleElement.textContent.trim().toLowerCase() === "пополнение") {
+              const modalBody = modal.querySelector(".modal-body");
+              if (modalBody) {
+                // Задаем содержимое модального окна согласно требуемой разметке
+                modalBody.innerHTML = `
+<div class="row mb-2">
+  <div class="col-sm-12">
+    <div class="row mt-2">
+      <div class="col-sm-12 d-flex align-items-center p-2 mt-3 justify-content-center">
+        <div class="d-flex align-items-center p-0">
+          <img class="account-currency-icon" src="/img/USDT_TRC20.4349296f.svg" alt="USDT">
+          <div class="account-sum">
+            <span class="account-amount text-nowrap">0.00000000 USDT</span>
+            <div class="d-flex flex-row align-items-center">
+              <span class="text-success" style="font-size: 70%;">Страховой лимит: 0.00 / 0.00 USDT</span>
+            </div>
+            <span class="on-hold">заблокировано: 0.00000000 USDT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <label class="col-sm-12 text-center">Адрес кошелька (USDT TRC20)</label>
+      <div class="col-sm-12 wallet-address p-3 mt-1">
+        <div class="d-flex flex-row gap-2 justify-content-center">
+          <pre class="m-0" style="font-size: 100%;"><code>TVRNvBL3DE7UKdVRL2SMU2oYGdD3d2SgEV</code></pre>
+          <a style="cursor: pointer;">
+            <span class="subtext copied-text-absolute">скопировано</span>
+            <i class="fa-regular fa-copy"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+            `;
+              }
+              // Открываем модальное окно: задаём display, добавляем класс show и выставляем aria-атрибуты
+              modal.style.display = "flex";
+              modal.classList.add("show");
+              modal.setAttribute("aria-modal", "true");
+              modal.removeAttribute("aria-hidden");
+            }
+          });
+        });
+      });
+
+      // Обработка закрытия модальных окон по клику на элементы с data-bs-dismiss="modal"
+      const closeElements = document.querySelectorAll('[data-bs-dismiss="modal"]');
+      closeElements.forEach(el => {
+        el.addEventListener("click", function () {
+          const modal = el.closest(".modal");
+          if (modal) {
+            modal.style.display = "none";
+            modal.classList.remove("show");
+            modal.removeAttribute("aria-modal");
+            modal.setAttribute("aria-hidden", "true");
+          }
+        });
+      });
+    });
+
+    setTimeout(() => {
+      document.getElementById('clOsBtn').onclick = () => {
+        document.querySelector('.modal.fade.show').style.display = 'none';
+      }
+    }, 0)
+
+    setTimeout(() => {
+      document.getElementById('otMeNaBtn').onclick = () => {
+        document.querySelector('.modal.fade.show').style.display = 'none';
+      }
+    }, 0)
+
+
+  </script>
+
+
+</body>
+<html>

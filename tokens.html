@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.f979c78b.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chunk-vendors.ae7abc5c.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Инвайт-токены</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1>Управление инвайт-токенами</h1>
+
+                <div class="mb-4">
+                    <button class="btn btn-primary" id="createTokenBtn">Создать токен</button>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table" id="tokensTable">
+                            <thead>
+                                <tr>
+                                    <th>Токен</th>
+                                    <th>Ссылка</th>
+                                    <th>Максимальное использование</th>
+                                    <th>Текущее использование</th>
+                                    <th>Срок действия</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Tokens will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Token Modal -->
+    <div class="modal fade" id="tokenModal" tabindex="-1" aria-labelledby="tokenModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tokenModalLabel">Создать инвайт-токен</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="tokenForm">
+                        <div class="mb-3">
+                            <label for="maxUses" class="form-label">Максимальное количество использований</label>
+                            <input type="number" class="form-control" id="maxUses" min="1" value="1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="expiryDays" class="form-label">Срок действия (дней)</label>
+                            <input type="number" class="form-control" id="expiryDays" min="1" value="7">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" id="saveTokenBtn">Создать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Token Created Modal -->
+    <div class="modal fade" id="tokenCreatedModal" tabindex="-1" aria-labelledby="tokenCreatedModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tokenCreatedModalLabel">Токен создан</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Ваш инвайт-токен успешно создан:</p>
+                    <div class="alert alert-info" id="tokenValue"></div>
+                    <p>Ссылка для приглашения:</p>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="inviteLink" readonly>
+                        <button class="btn btn-outline-secondary" type="button" id="copyLinkBtn">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load tokens
+            loadTokens();
+
+            // Create token button
+            document.getElementById('createTokenBtn').addEventListener('click', function() {
+                const modal = new bootstrap.Modal(document.getElementById('tokenModal'));
+                modal.show();
+            });
+
+            // Save token
+            document.getElementById('saveTokenBtn').addEventListener('click', function() {
+                const maxUses = document.getElementById('maxUses').value;
+                const expiryDays = document.getElementById('expiryDays').value;
+
+                fetch('/generate_token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ max_uses: parseInt(maxUses), expiry_days: parseInt(expiryDays) })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Close modal
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('tokenModal'));
+                        modal.hide();
+
+                        // Reset form
+                        document.getElementById('maxUses').value = '1';
+                        document.getElementById('expiryDays').value = '7';
+
+                        // Show created token
+                        document.getElementById('tokenValue').textContent = data.token;
+                        document.getElementById('inviteLink').value = data.invite_link;
+
+                        // Show token created modal
+                        const createdModal = new bootstrap.Modal(document.getElementById('tokenCreatedModal'));
+                        createdModal.show();
+
+                        // Reload tokens
+                        loadTokens();
+                    } else {
+                        alert('Ошибка: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Произошла ошибка при создании токена');
+                });
+            });
+
+            // Copy invite link
+            document.getElementById('copyLinkBtn').addEventListener('click', function() {
+                const inviteLink = document.getElementById('inviteLink');
+                inviteLink.select();
+                document.execCommand('copy');
+
+                // Show copied feedback
+                this.innerHTML = '<i class="fa-solid fa-check"></i>';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fa-regular fa-copy"></i>';
+                }, 2000);
+            });
+        });
+
+        function loadTokens() {
+            fetch('/tokens')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const tbody = document.querySelector('#tokensTable tbody');
+                        tbody.innerHTML = '';
+
+                        data.tokens.forEach(token => {
+                            const row = document.createElement('tr');
+
+                            // Format expiry date
+                            const expiryDate = new Date(token.expires_at);
+
+                            row.innerHTML = `
+                                <td>${token.token.substring(0, 8)}...</td>
+                                <td><a href="${window.location.origin}/invite/${token.token}" target="_blank">${window.location.origin}/invite/${token.token}</a></td>
+                                <td>${token.max_uses}</td>
+                                <td>${token.uses}</td>
+                                <td>${expiryDate.toLocaleString()}</td>
+                                <td>
+                                    <button class="btn btn-outline-danger btn-sm" data-token-id="${token.id}" onclick="deleteToken(${token.id})">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
+                            `;
+
+                            tbody.appendChild(row);
+                        });
+                    } else {
+                        console.error('Error loading tokens:', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function deleteToken(tokenId) {
+            if (confirm('Вы уверены, что хотите удалить этот токен?')) {
+                fetch(`/tokens/${tokenId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        loadTokens();
+                    } else {
+                        alert('Ошибка: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Произошла ошибка при удалении токена');
+                });
+            }
+        }
+    </script>
+</body>
+</html>
